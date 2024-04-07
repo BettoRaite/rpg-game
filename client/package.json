@@ -1,0 +1,23 @@
+{
+  "name": "axoloth-rpg-client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "nodemon index.js",
+    "test": "mocha"
+  },
+  "author": "bettoraite",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^5.1.0",
+    "eslint": "^8.57.0",
+    "eslint-config-google": "^0.14.0",
+    "mocha": "^10.4.0",
+    "nodemon": "^3.1.0",
+    "vite": "^4.4.5"
+  }
+}
