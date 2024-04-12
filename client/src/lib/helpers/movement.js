@@ -1,4 +1,4 @@
-import {throwTypeErrorFromTemplate} from '../utils/customErrors.js';
+// DANGEROUS, LOOOK AT THE ERROR HANDLING!!!!
 import {DIRECTION, GRID_CELL} from '../constants.js';
 import Vector2 from '../Vector2.js';
 /**
@@ -17,9 +17,7 @@ import Vector2 from '../Vector2.js';
  */
 export const calcNewDestPos = (direction, entityPos) => {
   if (typeof direction !== 'string') {
-    throwTypeErrorFromTemplate('direction', 'string', direction);
   } else if (!(entityPos instanceof Vector2)) {
-    throwTypeErrorFromTemplate('entityPos', 'Vector2', entityPos);
   }
   direction = direction.toUpperCase();
   switch (direction) {

@@ -1,4 +1,4 @@
-export const DATA_TYPES = {
+export const EXPECTED_TYPES = {
   number: '[Number]',
   string: '[String]',
   boolean: '[Boolean]',
@@ -11,6 +11,7 @@ export const DATA_TYPES = {
   map: '[Map]',
   set: '[Set]',
 };
+
 export const DIRECTION = {
   top: 'TOP',
   down: 'DOWN',

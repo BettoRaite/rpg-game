@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 
 import Vector2 from './Vector2.js';
 /**
@@ -22,6 +23,7 @@ export default class Sprite {
     frame,
     scale,
     position,
+    animator,
   }) {
     this.resource = resource;
     this.frameSize = frameSize ?? new Vector2(16, 16);
@@ -31,6 +33,7 @@ export default class Sprite {
     this.frameMap = new Map();
     this.scale = scale ?? 1;
     this.position = position ?? new Vector2(0, 0);
+    this.animator = animator;
     this.buildFrameMap();
   }
 
@@ -46,6 +49,10 @@ export default class Sprite {
         ++frameCount;
       }
     }
+  }
+  step(deltaTime) {
+    this.animator.step(deltaTime);
+    this.frame = this.animator.frame;
   }
   // eslint-disable-next-line require-jsdoc
   async drawImage(ctx, x, y) {

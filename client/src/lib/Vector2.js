@@ -1,5 +1,4 @@
-import {throwTypeErrorFromTemplate} from './utils/customErrors.js';
-import {DATA_TYPES} from './constants.js';
+// DANGEROUS, LOOOK AT THE ERROR HANDLING!!!!
 /**
  * Class representing a single point.
  * @class
@@ -12,9 +11,7 @@ export default class Vector2 {
    */
   constructor(x = 0, y =0) {
     if (!Number.isFinite(x)) {
-      throwTypeErrorFromTemplate('x', DATA_TYPES.number, x);
     } else if (!Number.isFinite(y)) {
-      throwTypeErrorFromTemplate('y', DATA_TYPES.number, y);
     }
     this.x = x;
     this.y = y;
@@ -30,7 +27,6 @@ export default class Vector2 {
    */
   cloneTo(position) {
     if (!(position instanceof Vector2)) {
-      throwTypeErrorFromTemplate('position', 'Vector2', position);
     }
     position.x = this.x;
     position.y = this.y;

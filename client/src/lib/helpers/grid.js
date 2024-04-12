@@ -1,6 +1,5 @@
+// DANGEROUS, LOOOK AT THE ERROR HANDLING!!!!
 import {GRID_CELL} from '../constants';
-import {throwTypeErrorFromTemplate} from '../utils/customErrors';
-import {DATA_TYPES} from '../constants';
 /**
  * Calculates total grid length based on the number of grid cells.
  * @param {Number} cells - Number of cells.
@@ -11,7 +10,6 @@ import {DATA_TYPES} from '../constants';
  */
 export const gridCells = (cells) => {
   if (!Number.isFinite(cells)) {
-    throwTypeErrorFromTemplate('cells', DATA_TYPES.number, cells);
   }
 
   return cells * GRID_CELL.size;

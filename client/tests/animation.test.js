@@ -1,18 +1,23 @@
 import {expect} from 'chai';
-import {Animation} from '../src/lib/animation.js';
+import {Animation} from '../src/lib/animation/Animation.js';
+import {ArrayInstanceError} from '../src/lib/utils/customErrors.js';
 
 describe('Animation', () => {
-  it('should throw TypeError if frames is not an array', () => {
-    expect(() => frameSequenceFromPattern('not a number')).to.throw(TypeError);
-    expect(() => frameSequenceFromPattern(NaN)).to.throw(TypeError);
-    expect(() => frameSequenceFromPattern(null)).to.throw(TypeError);
-    expect(() => frameSequenceFromPattern(undefined)).to.throw(TypeError);
-    expect(() => frameSequenceFromPattern({})).to.throw(TypeError);
-  });
+  describe('constructor', () => {
+    it(`should throw ArrayInstanceError 
+    if frameNumbers is not an array`, () => {
+      const errorMessage = (paramName) => `\n` +
+        `Parameter: "${paramName}"\n` +
+        `Was expected to be of type: [Array]\n`;
 
-  it('should throw TypeError for float-point inputs', () => {
-    expect(() => frameSequenceFromPattern(12.3)).to.throw(TypeError);
-    expect(() => frameSequenceFromPattern(12.2)).to.throw(TypeError);
-    expect(() => frameSequenceFromPattern(1.12)).to.throw(TypeError);
+      expect(() => new Animation('not an array'))
+          .to.throw(ArrayInstanceError, errorMessage('frameNumbers'));
+
+      expect(() => new Animation(undefined))
+          .to.throw(ArrayInstanceError, errorMessage('frameNumbers'));
+
+      expect(() => new Animation({}))
+          .to.throw(ArrayInstanceError, errorMessage('frameNumbers'));
+    });
   });
 });

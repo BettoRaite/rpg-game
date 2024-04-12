@@ -2,6 +2,9 @@ import {resources} from './Resource.js';
 import Sprite from './Sprite.js';
 import Vector2 from './Vector2.js';
 import {gridCells} from './helpers/grid.js';
+import {playerAnimationsMap} from './animation/AnimationsMap.js';
+import {AnimationsManager} from './animation/AnimationsManager.js';
+
 export const ground = new Sprite({
   resource: resources.images.ground,
   frameSize: new Vector2(320, 180),
@@ -24,4 +27,5 @@ export const player = new Sprite({
   vFrames: 8,
   frame: 1,
   position: new Vector2(gridCells(2.5), gridCells(5)),
+  animator: new AnimationsManager(playerAnimationsMap),
 });
