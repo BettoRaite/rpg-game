@@ -1,5 +1,6 @@
 export const EXPECTED_TYPES = {
   number: '[Number]',
+  integer: '[Integer]',
   string: '[String]',
   boolean: '[Boolean]',
   undefined: '[Undefined]',

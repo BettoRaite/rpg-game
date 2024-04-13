@@ -84,7 +84,7 @@ export class IntegerError extends InvalidTypeError {
    * @param {*} actualValue - The actual value that was not an integer.
    */
   constructor(paramName, actualValue) {
-    super(paramName, 'Integer', actualValue);
+    super(paramName, EXPECTED_TYPES.integer, actualValue);
     this.name = this.constructor.name;
   }
 }

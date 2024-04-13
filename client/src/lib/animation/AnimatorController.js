@@ -17,7 +17,7 @@ export class AnimationController {
   get frame() {
     for (const frame of this.#animation.frames) {
       if (this.#timer <= frame.displayTime) {
-        return frame.frameNumber;
+        return frame.frameIndex;
       }
     }
   }

@@ -1,58 +1,73 @@
 /* eslint-disable require-jsdoc */
 import {frameSequenceFromPattern} from '../helpers/frame.js';
-import {ArrayInstanceError, IntegerError} from '../utils/customErrors.js';
-// [x]: Check if frameNumbers is an array
-// [-]: Check if each element of the frameNumbers array is a number.
-// [-]: Check if first number in frameDurations is a number.
+import {
+  ArrayInstanceError,
+  IntegerError,
+  NumberTypeError,
+} from '../utils/customErrors.js';
+
+// [+]: Check if frameNumbers is an array
+// [+]: Check if first frame duration is an integer.
+// [+]: Check if each element of the frameNumbers array is a number.
 
 export class Animation {
   #animationDurationMs = 0;
-  constructor(frameNumbers, ...frameDurationsMs) {
-    if (!Array.isArray(frameNumbers)) {
-      throw new ArrayInstanceError('frameNumbers', frameNumbers);
+  #frames = [];
+
+  constructor(frameIndices, ...frameDurationsMs) {
+    if (!Array.isArray(frameIndices)) {
+      throw new ArrayInstanceError('frameIndices', frameIndices);
     }
-    const defaultFrameDurationMs = frameDurationsMs[0];
-    if (!Number.isFinite(defaultFrameDurationMs) ||
-    !Number.isInteger(defaultFrameDurationMs)) {
-      throw new IntegerError('first frame duration', defaultFrameDurationMs);
+    const defaultDurationMs = frameDurationsMs[0];
+    if (!Number.isInteger(defaultDurationMs)) {
+      throw new IntegerError('first frame duration', defaultDurationMs);
     }
-    this.#animationDurationMs = 0;
-    this.frames = frameNumbers.map((frameNumber, index)=>{
-      // const displayTime = frameDurationsMs[index];
+
+    this.#frames = frameIndices.map((frameIndex, index) => {
       let frameTime = frameDurationsMs[index];
       if (!Number.isInteger(frameTime)) {
-        frameTime = defaultFrameDurationMs;
+        frameTime = Math.abs(defaultDurationMs);
       }
-      const displayTime = this.#animationDurationMs + frameTime;
-      this.#animationDurationMs += frameTime;
+      if (!Number.isFinite(frameIndex)) {
+        throw new NumberTypeError(
+            `frame with index: ${index}`, frameIndex);
+      }
+      const displayTime = this.#animationDurationMs + Math.abs(frameTime);
+      this.#animationDurationMs += Math.abs(frameTime);
 
       return {
         displayTime,
-        frameNumber,
+        frameIndex: Math.abs(frameIndex),
       };
     });
-    console.log(this.#animationDurationMs);
   }
+
   get animationDurationMs() {
+    // Returns the total duration of the animation in milliseconds.
     return this.#animationDurationMs;
   }
-}
 
+  get frames() {
+    // Returns an array of frames with their display times.
+    return this.#frames;
+  }
+}
+const animationDurationMs = 130;
 export const walkDownAnimation = new Animation(
     frameSequenceFromPattern(0),
-    100,
+    animationDurationMs,
 );
 export const walkTopAnimation = new Animation(
     frameSequenceFromPattern(6),
-    100,
+    animationDurationMs,
 );
 export const walkRightAnimation = new Animation(
     frameSequenceFromPattern(3),
-    100,
+    animationDurationMs,
 );
 export const walkLeftAnimation = new Animation(
     frameSequenceFromPattern(9),
-    100,
+    animationDurationMs,
 );
 export const standAnimation = new Animation(
     [1, 12],
