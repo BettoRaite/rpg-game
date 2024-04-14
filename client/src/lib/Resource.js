@@ -1,3 +1,4 @@
+// [-]: Logic check
 /**
  * Loader for game assets.
  */

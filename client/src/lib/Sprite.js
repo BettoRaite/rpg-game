@@ -1,10 +1,14 @@
 /* eslint-disable require-jsdoc */
-
+// [-]: Add error handling
+// [-]: Write JSdoc
 import Vector2 from './Vector2.js';
+import {AnimationsManager} from './animation/AnimationsManager.js';
 /**
  * Creates frames based on image.
  */
 export default class Sprite {
+  #frame = 0;
+  #animationsManager = null;
   /**
      * @param {Image} resource - An image that can be added to canvas.
      * @param {Vector2} frameSize - The frame size(x,y) in pixels.
@@ -23,17 +27,19 @@ export default class Sprite {
     frame,
     scale,
     position,
-    animator,
+    animationsManager,
   }) {
     this.resource = resource;
     this.frameSize = frameSize ?? new Vector2(16, 16);
     this.hFrames = hFrames ?? 1;
     this.vFrames = vFrames ?? 1;
-    this.frame = frame ?? 0;
+    this.#frame = Number.isFinite(frame) ? frame : 0;
     this.frameMap = new Map();
     this.scale = scale ?? 1;
     this.position = position ?? new Vector2(0, 0);
-    this.animator = animator;
+    if (animationsManager instanceof AnimationsManager) {
+      this.#animationsManager = animationsManager;
+    }
     this.buildFrameMap();
   }
 
@@ -50,9 +56,21 @@ export default class Sprite {
       }
     }
   }
+  get animationsManager() {
+    if (this.#animationsManager === null) {
+      throw new SyntaxError('animationsManager is empty');
+    }
+    return this.#animationsManager;
+  }
+  play(animationKey) {
+    this.animationsManager.play(animationKey);
+  }
   step(deltaTime) {
-    this.animator.step(deltaTime);
-    this.frame = this.animator.frame;
+    if (this.#animationsManager === null) {
+      throw new SyntaxError('animationsManager is empty');
+    }
+    this.#animationsManager.step(deltaTime);
+    this.#frame = this.#animationsManager.frame;
   }
   // eslint-disable-next-line require-jsdoc
   async drawImage(ctx, x, y) {
@@ -61,7 +79,7 @@ export default class Sprite {
     let frameStartX = 0;
     let frameStartY = 0;
 
-    const frame = this.frameMap.get(this.frame);
+    const frame = this.frameMap.get(this.#frame);
 
     if (frame) {
       frameStartX = frame.x;

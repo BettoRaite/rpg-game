@@ -1,4 +1,5 @@
 /* eslint-disable require-jsdoc */
+// FIXME: Rewrite private properties
 /**
  * Represents collision checker.
  */

@@ -1,4 +1,5 @@
-import {InvalidFunctionTypeError} from './utils/customErrors.js';
+import {InvalidFunctionTypeError} from './utils/Errors.js';
+// FIXME: Rewrite private properties
 /**
  * Class representing a loop that runs
  * approximately 60 times(frames) per seconds. (updates/draws regardless of

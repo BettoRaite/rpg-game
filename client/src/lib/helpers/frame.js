@@ -1,20 +1,20 @@
+import {PositiveIntegerError} from '../utils/Errors.js';
 /**
- * Creates a sequence of frames in the pattern of [`rootFrame`+1,
- * `rootFrame`, `rootFrame`+1, `rootFrame`+2].
- * @param {Number} rootFrame - The root frame of the sequence.
+ * Creates a frame indices array in the pattern of [`rootFrameIndex`+1,
+ * `rootFrameIndex`, `rootFrameIndex`+1, `rootFrameIndex`+2].
+ * @param {Number} rootFrameIndex - The root frame index, that's
+ * a positive integer.
+ * @throws {PositiveIntegerError} - If `rootFrameIndex` is not a positive
+ * integer.
  * @return {Array} - A sequence of frames.
  */
-export const frameSequenceFromPattern = (rootFrame) => {
-  if (!Number.isFinite(rootFrame)) {
-    const description =
-    // eslint-disable-next-line max-len
-    `rootFrame was expected to be a finite number instead got this: ${rootFrame}`;
-    throw new TypeError(description);
+export const frameIndicesFromPattern = (rootFrameIndex) => {
+  if (!Number.isInteger(rootFrameIndex) || rootFrameIndex < 0) {
+    throw new PositiveIntegerError('rootFrameIndex', rootFrameIndex);
   }
-  if (!Number.isInteger(rootFrame)) {
-    const description =
-    `rootFrame was expected to be an integer instead got this: ${rootFrame}`;
-    throw new TypeError(description);
-  }
-  return [rootFrame + 1, rootFrame, rootFrame + 1, rootFrame + 2];
+  return [
+    rootFrameIndex + 1,
+    rootFrameIndex,
+    rootFrameIndex + 1,
+    rootFrameIndex + 2];
 };

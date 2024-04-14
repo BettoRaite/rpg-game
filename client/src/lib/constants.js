@@ -1,6 +1,7 @@
 export const EXPECTED_TYPES = {
   number: '[Number]',
   integer: '[Integer]',
+  positiveInteger: '[Positive Integer]',
   string: '[String]',
   boolean: '[Boolean]',
   undefined: '[Undefined]',
@@ -11,6 +12,7 @@ export const EXPECTED_TYPES = {
   date: '[Date]',
   map: '[Map]',
   set: '[Set]',
+  animationsMap: '[instance of class AnimationsMap]',
 };
 
 export const DIRECTION = {

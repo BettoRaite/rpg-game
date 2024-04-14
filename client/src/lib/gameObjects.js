@@ -27,6 +27,6 @@ export const player = new Sprite({
   vFrames: 8,
   frame: 1,
   position: new Vector2(gridCells(2.5), gridCells(5)),
-  animator: new AnimationsManager(playerAnimationsMap),
+  animationsManager: new AnimationsManager(playerAnimationsMap),
 });
 console.log(playerAnimationsMap);

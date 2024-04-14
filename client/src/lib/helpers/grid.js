@@ -1,4 +1,4 @@
-// DANGEROUS, LOOOK AT THE ERROR HANDLING!!!!
+// FIXME: Add throw statements
 import {GRID_CELL} from '../constants';
 /**
  * Calculates total grid length based on the number of grid cells.

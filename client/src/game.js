@@ -26,19 +26,19 @@ const update = (deltaTime) => {
   }
   switch (dir) {
     case DIRECTION.top:
-      player.animator.play('walkTop');
+      player.play('walkTop');
       break;
     case DIRECTION.down:
-      player.animator.play('walkDown');
+      player.play('walkDown');
       break;
     case DIRECTION.right:
-      player.animator.play('walkRight');
+      player.play('walkRight');
       break;
     case DIRECTION.left:
-      player.animator.play('walkLeft');
+      player.play('walkLeft');
       break;
     case DIRECTION.default:
-      player.animator.play('stand');
+      player.play('stand');
   }
   player.step(deltaTime);
 };

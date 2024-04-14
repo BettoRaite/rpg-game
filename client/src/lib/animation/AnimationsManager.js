@@ -1,5 +1,7 @@
 /* eslint-disable require-jsdoc */
 import AnimationsMap from './AnimationsMap.js';
+import {AnimationsMapInstanceError} from '../utils/Errors.js';
+// [-]: Add JSdoc
 
 export class AnimationsManager {
   #animations = {};
@@ -7,7 +9,7 @@ export class AnimationsManager {
   #activeKey = '';
   constructor(animationsMap) {
     if (!(animationsMap instanceof AnimationsMap)) {
-      throw new Error('shitt');
+      throw new AnimationsMapInstanceError('animationsMap', animationsMap);
     }
     this.#animations = animationsMap;
     this.#animationKeys = animationsMap.animationKeys;
@@ -18,7 +20,9 @@ export class AnimationsManager {
   }
   play(animationKey) {
     if (!this.#animationKeys.includes(animationKey)) {
-      throw new SyntaxError('Invalid animation key');
+      const avaliableKeys = this.#animationKeys.join(' | ');
+      throw new SyntaxError(
+          `Invalid animation key. Avaliable keys are: ${avaliableKeys}`);
     } else if (this.#activeKey === animationKey) {
       return;
     }

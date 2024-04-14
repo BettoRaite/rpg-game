@@ -1,72 +1,94 @@
 /* eslint-disable require-jsdoc */
-import {frameSequenceFromPattern} from '../helpers/frame.js';
+import {frameIndicesFromPattern} from '../helpers/frame.js';
 import {
   ArrayInstanceError,
-  IntegerError,
-  NumberTypeError,
-} from '../utils/customErrors.js';
+  PositiveIntegerError,
+} from '../utils/Errors.js';
 
-// [+]: Check if frameNumbers is an array
-// [+]: Check if first frame duration is an integer.
-// [+]: Check if each element of the frameNumbers array is a number.
-
+/*
+Represents an animation that contains total animation duration in
+milliseconds along with frames. Frames have certain index and
+time in milliseconds at which they end.
+*/
 export class Animation {
   #animationDurationMs = 0;
   #frames = [];
-
+  /**
+   * Creates a new Animation instance.
+   *
+   * @param {Number[]} frameIndices - An array of frame indexes.
+   * @param  {...Number} frameDurationsMs - An array of frame durations. Can be
+   * just a positive integer that's more than 0, that is `frameDurationsMs[0]`.
+   * If no explicit duration is speficied for current frame or the frame
+   * duration is not a positive integer more than 0, then the default one
+   * will be used `frameDurationsMs[0]`.
+   * @throws {ArrayInstanceError} - If `frameIndices` is not an array.
+   * @throws {TypeError} - If `frameDurationsMs[0]` is not
+   * a positive integer more than 0.
+   * @throws {PositiveIntegerError} - If any element of `frameIndices`
+   * is not a positive integer.
+   */
   constructor(frameIndices, ...frameDurationsMs) {
     if (!Array.isArray(frameIndices)) {
       throw new ArrayInstanceError('frameIndices', frameIndices);
     }
     const defaultDurationMs = frameDurationsMs[0];
-    if (!Number.isInteger(defaultDurationMs)) {
-      throw new IntegerError('first frame duration', defaultDurationMs);
+
+    if (!Number.isInteger(defaultDurationMs) || defaultDurationMs <= 0) {
+      throw new TypeError(`First frame duration 
+      must be a positive integer more than 0.`);
     }
 
     this.#frames = frameIndices.map((frameIndex, index) => {
-      let frameTime = frameDurationsMs[index];
-      if (!Number.isInteger(frameTime)) {
-        frameTime = Math.abs(defaultDurationMs);
-      }
-      if (!Number.isFinite(frameIndex)) {
-        throw new NumberTypeError(
+      if (!Number.isInteger(frameIndex) || frameIndex < 0) {
+        throw new PositiveIntegerError(
             `frame with index: ${index}`, frameIndex);
       }
-      const displayTime = this.#animationDurationMs + Math.abs(frameTime);
-      this.#animationDurationMs += Math.abs(frameTime);
+      const frameDurationMs = frameDurationsMs[index];
 
+      if (Number.isInteger(frameDurationMs) && frameDurationMs > 0) {
+        this.#animationDurationMs += frameDurationMs;
+      } else {
+        this.#animationDurationMs += defaultDurationMs;
+      }
       return {
-        displayTime,
+        frameTimeEnd: this.#animationDurationMs,
         frameIndex: Math.abs(frameIndex),
       };
     });
   }
-
+  /**
+   *@return {Number} - Total animation duration in milliseconds.
+   */
   get animationDurationMs() {
     // Returns the total duration of the animation in milliseconds.
     return this.#animationDurationMs;
   }
-
+  /**
+   *@return {Array} - An array of frame objects, where each of them
+    has frame display end time along with frame index.
+   */
   get frames() {
     // Returns an array of frames with their display times.
     return this.#frames;
   }
 }
+
 const animationDurationMs = 130;
 export const walkDownAnimation = new Animation(
-    frameSequenceFromPattern(0),
+    frameIndicesFromPattern(0),
     animationDurationMs,
 );
 export const walkTopAnimation = new Animation(
-    frameSequenceFromPattern(6),
+    frameIndicesFromPattern(6),
     animationDurationMs,
 );
 export const walkRightAnimation = new Animation(
-    frameSequenceFromPattern(3),
+    frameIndicesFromPattern(3),
     animationDurationMs,
 );
 export const walkLeftAnimation = new Animation(
-    frameSequenceFromPattern(9),
+    frameIndicesFromPattern(9),
     animationDurationMs,
 );
 export const standAnimation = new Animation(

@@ -1,4 +1,4 @@
-// DANGEROUS, LOOOK AT THE ERROR HANDLING!!!!
+// FIXME: Add throw statements
 /**
  * Class representing a single point.
  * @class

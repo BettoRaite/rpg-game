@@ -1,4 +1,5 @@
 /* eslint-disable require-jsdoc */
+// [-]: Add JSdoc
 export function moveTowards(entity, destPos, speed ) {
   let deltaX = destPos.x - entity.x;
   let deltaY = destPos.y - entity.y;

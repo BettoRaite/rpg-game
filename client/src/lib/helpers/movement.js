@@ -1,4 +1,4 @@
-// DANGEROUS, LOOOK AT THE ERROR HANDLING!!!!
+// FIXME: Add throw statements
 import {DIRECTION, GRID_CELL} from '../constants.js';
 import Vector2 from '../Vector2.js';
 /**

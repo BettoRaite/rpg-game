@@ -1,5 +1,6 @@
 import {EXPECTED_TYPES} from '../constants.js';
 import {getDataType} from './typeChecking.js';
+// [-]: Needs testing
 /**
  * Represents a parent error for all other errors,
  * such as object instance error, invalid number error, and so on.
@@ -26,22 +27,6 @@ class InvalidTypeError extends Error {
 }
 /**
  * Represents an error that occurs when a value was expected
- * to be an array, but turned out to be otherwise.
- */
-export class ArrayInstanceError extends InvalidTypeError {
-  /**
-   * Creates a new ArrayInstanceError instance.
-   * @param {String} paramName - The name of the parameter
-   * that was expected to be an array.
-   * @param {*} actualValue - The actual value that was not an array.
-   */
-  constructor(paramName, actualValue) {
-    super(paramName, EXPECTED_TYPES.array, actualValue);
-    this.name = this.constructor.name;
-  }
-}
-/**
- * Represents an error that occurs when a value was expected
  * to be an instance of constructor Object, but turned out to be otherwise.
  */
 export class ObjectInstanceError extends InvalidTypeError {
@@ -53,6 +38,22 @@ export class ObjectInstanceError extends InvalidTypeError {
    */
   constructor(paramName, actualValue) {
     super(paramName, EXPECTED_TYPES.object, actualValue);
+    this.name = this.constructor.name;
+  }
+}
+/**
+ * Represents an error that occurs when a value was expected
+ * to be an array, but turned out to be otherwise.
+ */
+export class ArrayInstanceError extends InvalidTypeError {
+  /**
+   * Creates a new ArrayInstanceError instance.
+   * @param {String} paramName - The name of the parameter
+   * that was expected to be an array.
+   * @param {*} actualValue - The actual value that was not an array.
+   */
+  constructor(paramName, actualValue) {
+    super(paramName, EXPECTED_TYPES.array, actualValue);
     this.name = this.constructor.name;
   }
 }
@@ -88,7 +89,22 @@ export class IntegerError extends InvalidTypeError {
     this.name = this.constructor.name;
   }
 }
-
+/**
+ * Represents an error that occurs when a value was expected
+ * to be a positive integer, but turned out to be otherwise.
+ */
+export class PositiveIntegerError extends InvalidTypeError {
+  /**
+   * Creates a new PositiveIntegerError instance.
+   * @param {String} paramName - The name of the parameter
+   * that was expected to be a positive integer.
+   * @param {*} actualValue - The actual value that was not a positive integer.
+   */
+  constructor(paramName, actualValue) {
+    super(paramName, EXPECTED_TYPES.positiveInteger, actualValue);
+    this.name = this.constructor.name;
+  }
+}
 
 /**
  * Represents an error that happens when a parameter was expected
@@ -142,6 +158,24 @@ export class InvalidNumberError extends Error {
     // eslint-disable-next-line max-len
     const message = `Parameter "${paramName}" was expected to be a number, but received "${actualValue}".`;
     super(message);
+    this.name = this.constructor.name;
+  }
+}
+/**
+ * Represents an error that occurs when a value was expected
+ * to be an instance of class AnimationsMap,
+ * but turned out to be otherwise.
+ */
+export class AnimationsMapInstanceError extends InvalidTypeError {
+  /**
+   * Creates a new AnimationsMapInstanceError instance.
+   * @param {String} paramName - The name of the parameter
+   * that was expected to be an instance of class AnimationsMap.
+   * @param {*} actualValue - The actual value that was not an instance
+   * of class AnimationsMap.
+   */
+  constructor(paramName, actualValue) {
+    super(paramName, EXPECTED_TYPES.animationsMap, actualValue);
     this.name = this.constructor.name;
   }
 }
