@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import {ObjectInstanceError} from './utils/errors.js';
-import {isObject} from './utils/typeChecking.js';
-import ImageResource from './ImageResource.js';
+import {isObject} from './utils/type-checking.js';
+import ImageResource from './image-resource.js';
 /**
  * Loads and prepares image assets.
  */

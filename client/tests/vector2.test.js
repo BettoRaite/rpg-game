@@ -1,5 +1,5 @@
-import Vector2 from '../src/lib/Vector2.js';
-import {IntegerError} from '../src/lib/utils/Errors.js';
+import Vector2 from '../src/lib/vector2.js';
+import {IntegerError} from '../src/lib/utils/errors.js';
 import {EXPECTED_TYPES} from '../src/lib/constants.js';
 
 describe('Vector2', () => {

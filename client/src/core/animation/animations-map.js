@@ -5,9 +5,9 @@ import {
   walkRightAnimation,
   walkLeftAnimation,
   standAnimation,
-} from './Animation.js';
-import {AnimationController} from './AnimationController.js';
-import {isObject} from '../utils/typeChecking.js';
+} from './animation.js';
+import {AnimationController} from './animation-controller.js';
+import {isObject} from '../utils/type-checking.js';
 import {
   ObjectInstanceError,
   AnimationInstanceError,

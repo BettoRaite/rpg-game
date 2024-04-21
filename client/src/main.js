@@ -1,14 +1,14 @@
 // Main
-import {GameLoop} from './core/GameLoop.js';
-import Input from './core/Input.js';
-import Vector2 from './core/Vector2.js';
-import Sprite from './core/components/Sprite.js';
-import ImageResourceManager from './core/ImageResourceManager.js';
-import GameObject from './core/GameObject.js';
+import {GameLoop} from './core/game-loop.js';
+import Input from './core/input.js';
+import Vector2 from './core/vector2.js';
+import Sprite from './core/components/sprite.js';
+import ImageResourceManager from './core/image-resource-manager.js';
+import GameObject from './core/game-object.js';
 // Player
-import Player from './core/entities/Player/Player.js';
-import {playerAnimationsMap} from './core/animation/AnimationsMap.js';
-import {AnimationsManager} from './core/animation/AnimationsManager.js';
+import Player from './core/entities/Player/player.js';
+import {playerAnimationsMap} from './core/animation/animations-map.js';
+import {AnimationsManager} from './core/animation/animations-manager.js';
 // Helpers
 import {gridCells} from './core/helpers/grid.js';
 

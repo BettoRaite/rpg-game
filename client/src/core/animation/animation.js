@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import {frameIndicesFromPattern} from '../helpers/frameIndicesPattern.js';
+import {frameIndicesFromPattern} from '../helpers/frame-indices-pattern.js';
 import {
   ArrayInstanceError,
   PositiveIntegerError,

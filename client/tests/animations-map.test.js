@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import AnimationsMap from '../src/lib/animation/AnimationsMap.js';
+import AnimationsMap from '../src/lib/animation/animations-map.js';
 import {
   ObjectInstanceError,
   AnimationInstanceError,
-} from '../src/lib/utils/Errors.js';
+} from '../src/lib/utils/errors.js';
 import {EXPECTED_TYPES} from '../src/lib/constants.js';
-import {Animation} from '../src/lib/animation/Animation.js';
+import {Animation} from '../src/lib/animation/animation.js';
 
 describe('AnimationsMap', () => {
   describe('constructor', () => {

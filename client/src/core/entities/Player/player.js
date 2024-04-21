@@ -1,9 +1,9 @@
 /* eslint-disable require-jsdoc */
-import GameObject from '../../GameObject.js';
+import GameObject from '../../game-object.js';
 import {DIRECTION} from '../../constants.js';
-import {moveTowards} from '../../helpers/moveTowards';
-import {calcNewDestPos} from '../../helpers/destinationPosition';
-import Sprite from '../../components/Sprite';
+import {moveTowards} from '../../helpers/move-towards.js';
+import {calcNewDestPos} from '../../helpers/destination-position.js';
+import Sprite from '../../components/sprite.js';
 
 class Player extends GameObject {
   #spiteComponent;

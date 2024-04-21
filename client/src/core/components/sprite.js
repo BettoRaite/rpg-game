@@ -2,12 +2,12 @@
 // [-]: Add error handling
 // [-]: Write JSdoc
 
-import Vector2 from '../Vector2.js';
-import {AnimationsManager} from '../animation/AnimationsManager.js';
-import GameObject from '../GameObject.js';
-import ImageResource from '../ImageResource.js';
+import Vector2 from '../vector2.js';
+import {AnimationsManager} from '../animation/animations-manager.js';
+import GameObject from '../game-object.js';
+import ImageResource from '../image-resource.js';
 import {ObjectInstanceError} from '../utils/errors.js';
-import {isObject} from '../utils/typeChecking.js';
+import {isObject} from '../utils/type-checking.js';
 /**
  * Creates frames based on image.
  */

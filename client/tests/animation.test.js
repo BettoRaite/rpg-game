@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Animation} from '../src/lib/animation/Animation.js';
+import {Animation} from '../src/lib/animation/animation.js';
 import {
   ArrayInstanceError,
   PositiveIntegerError,
-} from '../src/lib/utils/Errors.js';
+} from '../src/lib/utils/errors.js';
 import {EXPECTED_TYPES} from '../src/lib/constants.js';
 
 describe('Animation', () => {

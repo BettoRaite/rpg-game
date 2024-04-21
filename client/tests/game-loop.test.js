@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {GameLoop} from '../src/lib/GameLoop.js';
-import {InvalidFunctionTypeError} from '../src/lib/utils/Errors.js';
+import {InvalidFunctionTypeError} from '../src/lib/utils/errors.js';
 
 describe('GameLoop', () => {
   describe('class that creates a basic game loop', ()=>{

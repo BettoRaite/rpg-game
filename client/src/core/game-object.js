@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import Vector2 from './Vector2.js';
+import Vector2 from './vector2.js';
 import {Vector2InstanceError} from './utils/errors.js';
 
 class GameObject {

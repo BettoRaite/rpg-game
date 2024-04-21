@@ -1,4 +1,4 @@
-import ImageResourceManager from '../../src/core/ImageResourceManager.js';
+import ImageResourceManager from '../../src/core/image-resource-manager.js';
 import {ObjectInstanceError} from '../../src/core/utils/errors.js';
 import {EXPECTED_TYPES} from '../../src/core/constants.js';
 import {expect, assert} from '../../node_modules/chai/chai.js';

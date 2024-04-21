@@ -1,7 +1,7 @@
 // FIXME: Add throw statements
 import {DIRECTION, GRID_CELL} from '../constants.js';
 
-import Vector2 from '../Vector2.js';
+import Vector2 from '../vector2.js';
 import {Vector2InstanceError} from '../utils/errors.js';
 /**
  * Calculates new destination position based on the

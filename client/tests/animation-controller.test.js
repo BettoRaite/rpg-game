@@ -1,9 +1,11 @@
 import {expect} from 'chai';
-import {AnimationController} from '../src/lib/animation/AnimationController.js';
-import {walkDownAnimation} from '../src/lib/animation/Animation.js';
+import {
+  AnimationController,
+} from '../src/lib/animation/animation-controller.js';
+import {walkDownAnimation} from '../src/lib/animation/animation.js';
 import {
   AnimationInstanceError,
-} from '../src/lib/utils/Errors.js';
+} from '../src/lib/utils/errors.js';
 
 describe('AnimationController', () => {
   describe('constructor', () => {

@@ -1,5 +1,5 @@
 import {EXPECTED_TYPES} from '../constants.js';
-import {getDataType} from './typeChecking.js';
+import {getDataType} from './type-checking.js';
 // [-]: Needs testing
 /**
  * Represents a parent error for all other errors,

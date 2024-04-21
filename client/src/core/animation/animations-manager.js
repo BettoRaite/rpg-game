@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import AnimationsMap from './AnimationsMap.js';
+import AnimationsMap from './animations-map.js';
 import {AnimationsMapInstanceError} from '../utils/errors.js';
 // [-]: Add JSdoc
 
