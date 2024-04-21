@@ -1,4 +1,4 @@
-import {PositiveIntegerError} from '../utils/Errors.js';
+import {PositiveIntegerError} from '../utils/errors.js';
 /**
  * Creates a frame indices array in the pattern of [`rootFrameIndex`+1,
  * `rootFrameIndex`, `rootFrameIndex`+1, `rootFrameIndex`+2].

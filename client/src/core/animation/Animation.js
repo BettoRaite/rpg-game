@@ -1,9 +1,9 @@
 /* eslint-disable require-jsdoc */
-import {frameIndicesFromPattern} from '../helpers/frame.js';
+import {frameIndicesFromPattern} from '../helpers/frameIndicesPattern.js';
 import {
   ArrayInstanceError,
   PositiveIntegerError,
-} from '../utils/Errors.js';
+} from '../utils/errors.js';
 
 /*
 Represents an animation that contains total animation duration in

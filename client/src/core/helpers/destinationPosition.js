@@ -1,6 +1,8 @@
 // FIXME: Add throw statements
 import {DIRECTION, GRID_CELL} from '../constants.js';
+
 import Vector2 from '../Vector2.js';
+import {Vector2InstanceError} from '../utils/errors.js';
 /**
  * Calculates new destination position based on the
  * current entity position and the given direction.
@@ -17,7 +19,9 @@ import Vector2 from '../Vector2.js';
  */
 export const calcNewDestPos = (direction, entityPos) => {
   if (typeof direction !== 'string') {
+    throw new Vector2InstanceError('direction', direction);
   } else if (!(entityPos instanceof Vector2)) {
+    throw new Vector2InstanceError('entityPos', entityPos);
   }
   direction = direction.toUpperCase();
   switch (direction) {

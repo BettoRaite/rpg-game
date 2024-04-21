@@ -11,8 +11,8 @@ export function isObject(val) {
 
 /**
  * Calls `Object.prototype.toString.call()` on passed in value.
- * @param {any} val any value.
- * @return {string} Returns a string representing the type of the `val`.
+ * @param {any} val - Any value.
+ * @return {string} - A string representing the type of the `val`.
  */
 export function getDataType(val) {
   return Object.prototype.toString.call(val).split(' ')?.at(1)?.slice(0, -1);

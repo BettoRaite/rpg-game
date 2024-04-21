@@ -1,6 +1,6 @@
 import {
   AnimationInstanceError,
-} from '../utils/Errors.js';
+} from '../utils/errors.js';
 import {Animation} from './Animation.js';
 /**
  * Controls the playback of an animation.

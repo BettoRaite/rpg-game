@@ -75,6 +75,22 @@ export class NumberTypeError extends InvalidTypeError {
 }
 /**
  * Represents an error that occurs when a value was expected
+ * to be a string, but turned out to be otherwise.
+ */
+export class StringTypeError extends InvalidTypeError {
+  /**
+   * Creates a new StringTypeError instance.
+   * @param {String} paramName - The name of the parameter
+   * that was expected to be a string.
+   * @param {*} actualValue - The actual value that was not a string.
+   */
+  constructor(paramName, actualValue) {
+    super(paramName, EXPECTED_TYPES.string, actualValue);
+    this.name = this.constructor.name;
+  }
+}
+/**
+ * Represents an error that occurs when a value was expected
  * to be an integer, but turned out to be otherwise.
  */
 export class IntegerError extends InvalidTypeError {
@@ -105,10 +121,26 @@ export class PositiveIntegerError extends InvalidTypeError {
     this.name = this.constructor.name;
   }
 }
-
+/**
+ * Represents an error that occurs when a parameter was expected
+ * to be an instance of Vector2 class, but turned out
+ * to be otherwise.
+ */
+export class Vector2InstanceError extends Error {
+  /**
+   * Creates an instance of Vector2InstanceError.
+   * @param {String} paramName - Name of the parameter that was
+   * expected to be an instance of Vector2 class.
+   * @param {*} actualValue - The actual value that was not a Vector2 instance.
+   */
+  constructor(paramName, actualValue) {
+    super(paramName, EXPECTED_TYPES.vector2, actualValue);
+    this.name = this.constructor.name;
+  }
+}
 /**
  * Represents an error that happens when a parameter was expected
- * to be an instance of animation class, but turned out
+ * to be an instance of Animation class, but turned out
  * to be otherwise.
  */
 export class AnimationInstanceError extends Error {

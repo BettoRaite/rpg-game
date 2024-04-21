@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import AnimationsMap from './AnimationsMap.js';
-import {AnimationsMapInstanceError} from '../utils/Errors.js';
+import {AnimationsMapInstanceError} from '../utils/errors.js';
 // [-]: Add JSdoc
 
 export class AnimationsManager {

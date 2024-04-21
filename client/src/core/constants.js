@@ -13,6 +13,7 @@ export const EXPECTED_TYPES = {
   map: '[Map]',
   set: '[Set]',
   animationsMap: '[instance of class AnimationsMap]',
+  vector2: '[instance of class Vector2]',
 };
 
 export const DIRECTION = {

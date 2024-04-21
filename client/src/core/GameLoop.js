@@ -1,4 +1,4 @@
-import {InvalidFunctionTypeError} from './utils/Errors.js';
+import {InvalidFunctionTypeError} from './utils/errors.js';
 // FIXME: Rewrite private properties
 /**
  * Class representing a loop that runs

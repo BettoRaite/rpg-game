@@ -1,4 +1,4 @@
-import {DIRECTION} from './constants.js';
+import {DIRECTION} from './constants';
 
 /**
  * Class representing an input device.
@@ -16,15 +16,15 @@ export default class Input {
      */
     this._directions = [];
 
-    document.addEventListener('keypress', this.keyPressHandler);
-    document.addEventListener('keyup', this.keyReleaseHandler);
+    document.addEventListener('keypress', this.#keyPressHandler);
+    document.addEventListener('keyup', this.#keyReleaseHandler);
   }
 
   /**
    * Handles keypress events and updates the directions array.
    * @param {KeyboardEvent} e - The keyboard event.
    */
-  keyPressHandler = (e) => {
+  #keyPressHandler = (e) => {
     const dir = DIRECTION[e.code];
     if (dir && !this._directions.includes(dir)) {
       this._directions.push(dir);
@@ -35,7 +35,7 @@ export default class Input {
    * Handles keyup events and removes the direction from the directions array.
    * @param {KeyboardEvent} e - The keyboard event.
    */
-  keyReleaseHandler = (e) => {
+  #keyReleaseHandler = (e) => {
     const dir = DIRECTION[e.code];
     if (this._directions.includes(dir)) {
       this._directions.splice(this._directions.indexOf(dir), 1);

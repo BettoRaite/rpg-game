@@ -11,7 +11,7 @@ import {isObject} from '../utils/typeChecking.js';
 import {
   ObjectInstanceError,
   AnimationInstanceError,
-} from '../utils/Errors.js';
+} from '../utils/errors.js';
 
 /**
  * Represents a mapping between a key and
