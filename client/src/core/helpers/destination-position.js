@@ -1,8 +1,8 @@
 // FIXME: Add throw statements
-import {DIRECTION, GRID_CELL} from '../constants.js';
+import { DIRECTION, GRID_CELL } from "../constants.js";
 
-import Vector2 from '../vector2.js';
-import {Vector2InstanceError} from '../utils/errors.js';
+import { Vector2InstanceError } from "../utils/errors.js";
+import Vector2 from "../vector2.js";
 /**
  * Calculates new destination position based on the
  * current entity position and the given direction.
@@ -18,39 +18,27 @@ import {Vector2InstanceError} from '../utils/errors.js';
  * // at 0 at the top of the monitor and at the bottom 'y' = monitorHeight.
  */
 export const calcNewDestPos = (direction, entityPos) => {
-  if (typeof direction !== 'string') {
-    throw new Vector2InstanceError('direction', direction);
-  } else if (!(entityPos instanceof Vector2)) {
-    throw new Vector2InstanceError('entityPos', entityPos);
-  }
-  direction = direction.toUpperCase();
-  switch (direction) {
-    case DIRECTION.default:
-      return entityPos;
-    case DIRECTION.top:
-      return new Vector2(
-          entityPos.x,
-          entityPos.y - GRID_CELL.size,
-      );
-    case DIRECTION.down:
-      return new Vector2(
-          entityPos.x,
-          entityPos.y + GRID_CELL.size,
-      );
+	if (typeof direction !== "string") {
+		throw new Vector2InstanceError("direction", direction);
+	}
+	if (!(entityPos instanceof Vector2)) {
+		throw new Vector2InstanceError("entityPos", entityPos);
+	}
+	switch (direction) {
+		case DIRECTION.default:
+			return entityPos;
+		case DIRECTION.top:
+			return new Vector2(entityPos.x, entityPos.y - GRID_CELL.size);
+		case DIRECTION.down:
+			return new Vector2(entityPos.x, entityPos.y + GRID_CELL.size);
 
-    case DIRECTION.left:
-      return new Vector2(
-          entityPos.x - GRID_CELL.size,
-          entityPos.y,
-      );
-    case DIRECTION.right:
-      return new Vector2(
-          entityPos.x + GRID_CELL.size,
-          entityPos.y,
-      );
-    default:
-      const validDirections = [...new Set(Object.values(DIRECTION))];
-      throw new SyntaxError(`Invalid direction, expected: ${validDirections}`);
-  }
+		case DIRECTION.left:
+			return new Vector2(entityPos.x - GRID_CELL.size, entityPos.y);
+		case DIRECTION.right:
+			return new Vector2(entityPos.x + GRID_CELL.size, entityPos.y);
+		default: {
+			const validDirections = [...new Set(Object.values(DIRECTION))];
+			throw new SyntaxError(`Invalid direction, expected: ${validDirections}`);
+		}
+	}
 };
-

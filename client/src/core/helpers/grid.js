@@ -1,5 +1,5 @@
-import {GRID_CELL} from '../constants.js';
-import {NumberTypeError} from '../utils/errors.js';
+import { GRID_CELL } from "../constants.js";
+import { NumberTypeError } from "../utils/errors.js";
 /**
  * Calculates total grid length based on the number of grid cells.
  * @param {Number} cells - Number of cells.
@@ -10,10 +10,9 @@ import {NumberTypeError} from '../utils/errors.js';
  * console.log(totalGridLength); // 48
  */
 export const gridCells = (cells) => {
-  if (!Number.isFinite(cells)) {
-    throw new NumberTypeError('cells', cells);
-  }
+	if (!Number.isFinite(cells)) {
+		throw new NumberTypeError("cells", cells);
+	}
 
-  return cells * GRID_CELL.size;
+	return cells * GRID_CELL.size;
 };
-

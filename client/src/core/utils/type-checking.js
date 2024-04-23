@@ -6,7 +6,7 @@
  * a bool indicating whether `val` is of type object or not.
  */
 export function isObject(val) {
-  return Object.prototype.toString.call(val) === '[object Object]';
+	return Object.prototype.toString.call(val) === "[object Object]";
 }
 
 /**
@@ -15,15 +15,13 @@ export function isObject(val) {
  * @return {string} - A string representing the type of the `val`.
  */
 export function getDataType(val) {
-  return Object.prototype.toString.call(val).split(' ')?.at(1)?.slice(0, -1);
+	return Object.prototype.toString.call(val).split(" ")?.at(1)?.slice(0, -1);
 }
 
-// eslint-disable-next-line require-jsdoc
-export function varNameToString(objWithVar) {
-  const arr = Object.keys(objWithVar);
-  if (arr.length === 1) {
-    return arr.pop();
-  } else {
-
-  }
-}
+// export function varNameToString(objWithVar) {
+// 	const arr = Object.keys(objWithVar);
+// 	if (arr.length === 1) {
+// 		return arr.pop();
+// 	} else {
+// 	}
+// }
