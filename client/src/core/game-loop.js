@@ -1,13 +1,20 @@
 import { InvalidFunctionTypeError } from "./utils/errors.js";
-// FIXME: Rewrite private properties
 /**
  * Class representing a loop that runs
  * approximately 60 times(frames) per seconds. (updates/draws regardless of
  * monitor mhz)
  */
 export class GameLoop {
+	#lastFrameTime = 0;
+	#accumulatedTime = 0;
+	#timeStep = 1000 / 60;
+	#updater;
+	#renderer;
+	#rafId = null;
+	#isRunning = false;
+
 	/**
-	 * Creates a game loop with an updater and a renderer functions.
+	 * Creates a new instance of GameLoop with an updater and a renderer functions.
 	 * @param {Function} updater - An update function, such as that,
 	 * which updates the player position.
 	 * @param {Function} renderer - A render function, such as that,
@@ -22,44 +29,39 @@ export class GameLoop {
 		if (typeof renderer !== "function") {
 			throw new InvalidFunctionTypeError("renderer");
 		}
-		this._lastFrameTime = 0;
-		this._accumulatedTime = 0;
-		this._timeStep = 1000 / 60;
-		this._updater = updater;
-		this._renderer = renderer;
-		this._rafId = null;
-		this._isRunning = false;
+		this.#updater = updater;
+		this.#renderer = renderer;
 	}
 	/**
 	 * Main loop function, that calls updater and renderer functions.
 	 * @param {Number} timestamp - The current timestamp.
 	 * @return {void}
 	 */
-	_mainLoop = (timestamp) => {
-		if (!this._isRunning) return;
-		const deltaTime = timestamp - this._lastFrameTime;
+	#mainLoop = (timestamp) => {
+		if (!this.#isRunning) return;
+		const deltaTime = timestamp - this.#lastFrameTime;
 
-		this._lastFrameTime = timestamp;
-		this._accumulatedTime += deltaTime;
+		this.#lastFrameTime = timestamp;
+		this.#accumulatedTime += deltaTime;
 		let isDrawTime = false;
-		while (this._accumulatedTime >= this._timeStep) {
+		while (this.#accumulatedTime >= this.#timeStep) {
 			isDrawTime = true;
-			this._updater(deltaTime);
-			this._accumulatedTime -= this._timeStep;
+			this.#updater(deltaTime);
+			this.#accumulatedTime -= this.#timeStep;
 		}
 		if (isDrawTime) {
-			this._renderer();
+			this.#renderer();
 		}
-		this._rafId = requestAnimationFrame(this._mainLoop);
+		this.#rafId = requestAnimationFrame(this.#mainLoop);
 	};
 	/**
 	 * Starts the game loop.
 	 * @return {void}
 	 */
 	start() {
-		if (!this._isRunning) {
-			this._isRunning = true;
-			this._rafId = requestAnimationFrame(this._mainLoop);
+		if (!this.#isRunning) {
+			this.#isRunning = true;
+			this.#rafId = requestAnimationFrame(this.#mainLoop);
 		}
 	}
 	/**
@@ -67,9 +69,9 @@ export class GameLoop {
 	 * @return {void}
 	 */
 	stop() {
-		if (this._rafId) {
-			cancelAnimationFrame(this._rafId);
+		if (this.#rafId) {
+			cancelAnimationFrame(this.#rafId);
 		}
-		this._isRunning = false;
+		this.#isRunning = false;
 	}
 }

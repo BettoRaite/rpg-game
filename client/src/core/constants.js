@@ -17,11 +17,6 @@ export const EXPECTED_TYPES = {
 	gameObject: "[instance of class GameObject]",
 };
 
-export const EVENT_KEYS = {
-	touched_dead_zone: "player_dead",
-	player_move: "player_has_moved",
-};
-
 export const DIRECTION = {
 	top: "TOP",
 	down: "DOWN",

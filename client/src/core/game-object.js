@@ -1,3 +1,4 @@
+import { events } from "./events/events.js";
 import {
 	GameObjectInstanceError,
 	Vector2InstanceError,
@@ -13,14 +14,15 @@ import Vector2 from "./vector2.js";
 class GameObject {
 	#children = [];
 	#position;
+	#parent = null;
 	/**
 	 * Creates a new instance of GameObject class
 	 * @param {Vector2} position - Represents a starting position of an entity,
 	 * should be an instance of Vector2, by default if not then, a new instance
-	 * of Vector2 is constructed with the position of [0,0].
+	 * of Vector2 is constructed with the default position of [0,0].
 	 */
 	constructor(position) {
-		this.#position = position instanceof Vector2 ? position : new Vector2(0, 0);
+		this.#position = position instanceof Vector2 ? position : new Vector2();
 	}
 	/**
 	 * A getter for the position of a game object.
@@ -40,6 +42,27 @@ class GameObject {
 			throw new Vector2InstanceError("position", position);
 		}
 		this.#position = position;
+	}
+	get parent() {
+		return this.#parent;
+	}
+	set parent(parent) {
+		if (!(parent instanceof GameObject)) {
+			throw new GameObjectInstanceError("parent", parent);
+		}
+		this.#parent = parent;
+	}
+	get children() {
+		return this.#children;
+	}
+	set children(children) {
+		for (const child of children) {
+			if (child instanceof GameObject) {
+				continue;
+			}
+			throw new GameObjectInstanceError("children", children);
+		}
+		this.#children = children;
 	}
 	/**
 	 * Calls drawImage method on the object itself and all its children
@@ -65,7 +88,7 @@ class GameObject {
 		const yPos = this.position.y + y;
 		this.drawImage(ctx, xPos, yPos);
 
-		for (const child of this.#children) {
+		for (const child of this.children) {
 			child.draw(ctx, xPos, yPos);
 		}
 	}
@@ -89,7 +112,7 @@ class GameObject {
 			throw new GameObjectInstanceError("root", root);
 		}
 
-		for (const child of this.#children) {
+		for (const child of this.children) {
 			child.stepEntry(deltaTime, root);
 		}
 		this.step(deltaTime, root);
@@ -103,8 +126,18 @@ class GameObject {
 	step() {
 		return;
 	}
+	detach() {
+		for (const child of this.children) {
+			child.detach();
+		}
+		if (this.parent === null) {
+			return;
+		}
+		this.parent.removeChild(this);
+		events.unsubscribe(this);
+	}
 	hasChild(gameObject) {
-		return this.#children.includes(gameObject);
+		return this.children.includes(gameObject);
 	}
 	/**
 	 * Adds a child object to the current object.
@@ -115,7 +148,8 @@ class GameObject {
 		if (!(gameObject instanceof GameObject)) {
 			throw new GameObjectInstanceError("gameObject", gameObject);
 		}
-		this.#children.push(gameObject);
+		gameObject.parent = this;
+		this.children.push(gameObject);
 	}
 	/**
 	 * Removes a child object from the current object.
@@ -126,7 +160,8 @@ class GameObject {
 		if (!(gameObject instanceof GameObject)) {
 			throw new GameObjectInstanceError("gameObject", gameObject);
 		}
-		this.#children = this.#children.filter((child) => {
+
+		this.children = this.children.filter((child) => {
 			return child !== gameObject;
 		});
 	}

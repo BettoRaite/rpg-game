@@ -3,9 +3,9 @@
 // [-]: Write JSdoc
 // [-]: Add animation speed.
 
-import { AnimationsManager } from "../animation/animations-manager.js";
+import AnimationsManager from "../animation/animations-manager.js";
 import GameObject from "../game-object.js";
-import ImageResource from "../image-resource.js";
+import ImageResource from "../resources/image-resource.js";
 import { ObjectInstanceError } from "../utils/errors.js";
 import { isObject } from "../utils/type-checking.js";
 import Vector2 from "../vector2.js";
@@ -22,9 +22,7 @@ export default class Sprite extends GameObject {
 	#frameMap;
 	#scale;
 
-	constructor(spriteConfig, position) {
-		super(position);
-
+	constructor(spriteConfig) {
 		if (!isObject(spriteConfig)) {
 			throw new ObjectInstanceError("spriteConfig", spriteConfig);
 		}
@@ -37,7 +35,9 @@ export default class Sprite extends GameObject {
 			frame,
 			scale,
 			animationsManager,
+			position,
 		} = spriteConfig;
+		super(position);
 
 		if (!(imageResource instanceof ImageResource)) {
 			throw new TypeError("Expected an instance of class ImageResource");

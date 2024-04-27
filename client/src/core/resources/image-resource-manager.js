@@ -1,6 +1,6 @@
+import { ObjectInstanceError } from "../utils/errors.js";
+import { isObject } from "../utils/type-checking.js";
 import ImageResource from "./image-resource.js";
-import { ObjectInstanceError } from "./utils/errors.js";
-import { isObject } from "./utils/type-checking.js";
 /**
  * Loads and prepares image assets.
  */
@@ -28,6 +28,7 @@ class ImageResourceManager {
 	}
 
 	/**
+	 * Getter for resources.
 	 * @return {Object} - Returns an object that maps between
 	 * resource key and resource(loaded image).
 	 */
@@ -36,8 +37,8 @@ class ImageResourceManager {
 	}
 
 	/**
-	 * Returns an array of resource keys.
-	 * @return {Array} - An array of resource keys.
+	 * Getter for resource keys.
+	 * @return {Array} - Returns an array of resource keys.
 	 */
 	get resourceKeys() {
 		return this.#resourceKeys;

@@ -6,6 +6,7 @@ import { isObject } from "../utils/type-checking.js";
 import { AnimationController } from "./animation-controller.js";
 import {
 	Animation,
+	pickUpItem,
 	standAnimation,
 	walkDownAnimation,
 	walkLeftAnimation,
@@ -18,7 +19,7 @@ import {
  * an instance of Animation class wrapped in an
  * instance of AnimationController class.
  */
-export default class AnimationsMap {
+class AnimationsMap {
 	#animationKeys = [];
 	/**
 	 * Creates a new instance of AnimationsMap class
@@ -46,11 +47,4 @@ export default class AnimationsMap {
 		return this.#animationKeys;
 	}
 }
-
-export const playerAnimationsMap = new AnimationsMap({
-	walkDown: walkDownAnimation,
-	walkTop: walkTopAnimation,
-	walkLeft: walkLeftAnimation,
-	walkRight: walkRightAnimation,
-	stand: standAnimation,
-});
+export default AnimationsMap;

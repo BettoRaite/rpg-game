@@ -1,10 +1,12 @@
+// [-]: Write docs.
+// [-]: Write tests.
 export class Events {
 	#callbacks = [];
 	#nextId = 0;
-	emit(eventName, value) {
+	emit(eventName, ...values) {
 		for (const cb of this.#callbacks) {
 			if (cb.eventName === eventName) {
-				cb.callback(value);
+				cb.callback(...values);
 			}
 		}
 	}

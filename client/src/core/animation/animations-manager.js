@@ -3,7 +3,7 @@ import { AnimationsMapInstanceError } from "../utils/errors.js";
 import AnimationsMap from "./animations-map.js";
 // [-]: Add JSdoc
 
-export class AnimationsManager {
+class AnimationsManager {
 	#animations = {};
 	#animationKeys = [];
 	#activeKey = "";
@@ -34,3 +34,4 @@ export class AnimationsManager {
 		return this.#animations[this.#activeKey].frame;
 	}
 }
+export default AnimationsManager;

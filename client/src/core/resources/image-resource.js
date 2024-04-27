@@ -1,4 +1,4 @@
-import { StringTypeError } from "./utils/errors.js";
+import { StringTypeError } from "../utils/errors.js";
 // FIXME: Add testing
 /**
   Loads image from specified path.

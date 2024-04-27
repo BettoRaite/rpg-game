@@ -122,7 +122,7 @@ export class PositiveIntegerError extends InvalidTypeError {
  * to be an instance of Vector2 class, but turned out
  * to be otherwise.
  */
-export class Vector2InstanceError extends Error {
+export class Vector2InstanceError extends InvalidTypeError {
 	/**
 	 * Creates an instance of Vector2InstanceError.
 	 * @param {String} paramName - Name of the parameter that was
@@ -139,7 +139,7 @@ export class Vector2InstanceError extends Error {
  * to be an instance of GameObject class, but turned out
  * to be otherwise.
  */
-export class GameObjectInstanceError extends Error {
+export class GameObjectInstanceError extends InvalidTypeError {
 	/**
 	 * Creates an instance of GameObjectInstanceError.
 	 * @param {String} paramName - Name of the parameter that was
@@ -156,7 +156,7 @@ export class GameObjectInstanceError extends Error {
  * to be an instance of Animation class, but turned out
  * to be otherwise.
  */
-export class AnimationInstanceError extends Error {
+export class AnimationInstanceError extends InvalidTypeError {
 	/**
 	 * Creates an instance of AnimationInstanceError.
 	 * @param {String} paramName - Name of the parameter that's
@@ -190,7 +190,7 @@ export class InvalidFunctionTypeError extends Error {
  * but turned out to be otherwise.
  * @class
  */
-export class InvalidNumberError extends Error {
+export class InvalidNumberError extends InvalidTypeError {
 	/**
 	 * Creates a new InvalidNumberError instance.
 	 * @param {String} paramName - The name of the parameter

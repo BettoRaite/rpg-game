@@ -90,4 +90,5 @@ export const walkLeftAnimation = new Animation(
 	frameIndicesFromPattern(9),
 	animationDurationMs,
 );
-export const standAnimation = new Animation([1, 12], 10000, 1000);
+export const pickUpItem = new Animation([12], 400);
+export const standAnimation = new Animation([1, 7], 10000, 3000);

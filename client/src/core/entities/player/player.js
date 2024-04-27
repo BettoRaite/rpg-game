@@ -1,16 +1,18 @@
-import { AnimationsManager } from "../../animation/animations-manager.js";
+import AnimationsManager from "../../animation/animations-manager.js";
 import { DIRECTION } from "../../constants.js";
-import { EVENT_KEYS } from "../../constants.js";
+import { EVENT_KEYS } from "../../events/event-keys.js";
 import { events } from "../../events/events.js";
 /* eslint-disable require-jsdoc */
 import GameObject from "../../game-object.js";
 import { calcNewDestPos } from "../../helpers/destination-position.js";
 import { moveTowards } from "../../helpers/move-towards.js";
 import Vector2 from "../../vector2.js";
+
 class Player extends GameObject {
 	#spiteComponent = null;
 	#destPos;
 	#lastPos;
+	#itemPickUpTime = 0;
 	constructor(position, ...components) {
 		super(position);
 
@@ -20,7 +22,7 @@ class Player extends GameObject {
 		for (const component of components) {
 			if (
 				component.animationsManager instanceof AnimationsManager &&
-				this.#spiteComponent === null
+				this.spiteComponent === null
 			) {
 				this.#spiteComponent = component;
 			}
@@ -31,42 +33,47 @@ class Player extends GameObject {
 		return this.#spiteComponent;
 	}
 	step(deltaTime, root) {
+		if (this.spiteComponent === null) {
+			return;
+		}
 		const { input } = root;
 		const direction = input.direction();
 		const distance = moveTowards(this.position, this.#destPos, 1);
+
 		if (direction !== DIRECTION.default && distance < 1) {
 			this.#destPos = calcNewDestPos(direction, this.position);
 		}
+
 		switch (direction) {
 			case DIRECTION.top:
-				this.#spiteComponent.play("walkTop");
+				this.spiteComponent.play("walkTop");
 				break;
 			case DIRECTION.down:
-				this.#spiteComponent.play("walkDown");
+				this.spiteComponent.play("walkDown");
 				break;
 			case DIRECTION.right:
-				this.#spiteComponent.play("walkRight");
+				this.spiteComponent.play("walkRight");
 				break;
 			case DIRECTION.left:
-				this.#spiteComponent.play("walkLeft");
+				this.spiteComponent.play("walkLeft");
 				break;
 
 			case DIRECTION.default:
 				if (distance === 0) {
-					this.#spiteComponent.play("stand");
+					this.spiteComponent.play("stand");
 				}
 		}
-		this.#spiteComponent.step(deltaTime);
+		this.spiteComponent.step(deltaTime);
 		this.#emitMoveEvent();
 	}
 	#emitMoveEvent() {
-		if (this.#lastPos.isEqual(this.position)) {
+		if (this.#lastPos.isEqualTo(this.position)) {
 			return;
 		}
 
-		const deltaPoint = this.#lastPos.substractFrom(this.position);
+		const deltaPos = this.#lastPos.substractFrom(this.position);
 		this.position.cloneTo(this.#lastPos);
-		events.emit(EVENT_KEYS.player_move, deltaPoint);
+		events.emit(EVENT_KEYS.player_move, this.position, deltaPos);
 	}
 }
 export default Player;

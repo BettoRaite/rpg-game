@@ -1,21 +1,19 @@
-import { DIRECTION } from "./constants";
+import { DIRECTION } from "./constants.js";
 
 /**
- * Class representing an input device.
- * @class
+ * Represents an input device.
  */
-export default class Input {
+class Input {
+	/**
+	 * An array to store the active directions based on keys currently pressed.
+	 * @type {Array}
+	 */
+	#directions = [];
 	/**
 	 * Create an Input instance.
 	 * Sets up event listeners for keypress and keyup to handle keyboard input.
 	 */
 	constructor() {
-		/**
-		 * An array to store the active directions based on keys currently pressed.
-		 * @type {Array}
-		 */
-		this._directions = [];
-
 		document.addEventListener("keypress", this.#keyPressHandler);
 		document.addEventListener("keyup", this.#keyReleaseHandler);
 	}
@@ -26,8 +24,8 @@ export default class Input {
 	 */
 	#keyPressHandler = (e) => {
 		const dir = DIRECTION[e.code];
-		if (dir && !this._directions.includes(dir)) {
-			this._directions.push(dir);
+		if (dir && !this.#directions.includes(dir)) {
+			this.#directions.push(dir);
 		}
 	};
 
@@ -37,8 +35,8 @@ export default class Input {
 	 */
 	#keyReleaseHandler = (e) => {
 		const dir = DIRECTION[e.code];
-		if (this._directions.includes(dir)) {
-			this._directions.splice(this._directions.indexOf(dir), 1);
+		if (this.#directions.includes(dir)) {
+			this.#directions.splice(this.#directions.indexOf(dir), 1);
 		}
 	};
 
@@ -53,6 +51,8 @@ export default class Input {
 	 * input.direction(); // "RIGHT"
 	 */
 	direction() {
-		return this._directions[0] ?? DIRECTION.default;
+		return this.#directions[0] ?? DIRECTION.default;
 	}
 }
+
+export default Input;
