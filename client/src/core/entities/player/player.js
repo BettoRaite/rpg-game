@@ -1,18 +1,20 @@
 import AnimationsManager from "../../animation/animations-manager.js";
+import Sprite from "../../components/sprite.js";
 import { DIRECTION } from "../../constants.js";
-import { EVENT_KEYS } from "../../events/event-keys.js";
+import { EVENT_KEYS } from "../../events/events.js";
 import { events } from "../../events/events.js";
 /* eslint-disable require-jsdoc */
 import GameObject from "../../game-object.js";
 import { calcNewDestPos } from "../../helpers/destination-position.js";
 import { moveTowards } from "../../helpers/move-towards.js";
+import { PositiveNumberError } from "../../utils/errors.js";
 import Vector2 from "../../vector2.js";
-
 class Player extends GameObject {
 	#spiteComponent = null;
 	#destPos;
 	#lastPos;
 	#itemPickUpTime = 0;
+	#itemPickupShell = new GameObject();
 	constructor(position, ...components) {
 		super(position);
 
@@ -28,12 +30,31 @@ class Player extends GameObject {
 			}
 			this.addChild(component);
 		}
+
+		events.on(EVENT_KEYS.player_pickable_overlap, this, (sprite) => {
+			this.#onItemPickUp(sprite);
+			this.#itemPickUpTime = 1000;
+		});
+	}
+	get itemPickUpTime() {
+		return this.#itemPickUpTime;
+	}
+	set itemPickUpTime(itemPickUpTime) {
+		if (!Number.isFinite(itemPickUpTime) || itemPickUpTime < 0) {
+			throw new PositiveNumberError("itemPickUpTime", itemPickUpTime);
+		}
+		this.#itemPickUpTime = itemPickUpTime;
 	}
 	get spiteComponent() {
 		return this.#spiteComponent;
 	}
 	step(deltaTime, root) {
 		if (this.spiteComponent === null) {
+			return;
+		}
+		if (this.itemPickUpTime > 0) {
+			this.#emitMoveEvent();
+			this.#runPickUpState(deltaTime);
 			return;
 		}
 		const { input } = root;
@@ -65,6 +86,24 @@ class Player extends GameObject {
 		}
 		this.spiteComponent.step(deltaTime);
 		this.#emitMoveEvent();
+	}
+	#runPickUpState(deltaTime) {
+		moveTowards(this.position, this.#destPos, 1);
+		const timeLeft = this.itemPickUpTime - deltaTime;
+		if (timeLeft <= 0) {
+			this.itemPickUpTime = 0;
+			this.#itemPickupShell.detachAll();
+			this.#itemPickupShell = null;
+			return;
+		}
+		this.itemPickUpTime = timeLeft;
+		this.spiteComponent.play("pickUp");
+	}
+	#onItemPickUp(sprite) {
+		this.#itemPickupShell = new GameObject();
+		this.#itemPickupShell.addChild(sprite);
+		sprite.position.y = 4;
+		this.addChild(this.#itemPickupShell);
 	}
 	#emitMoveEvent() {
 		if (this.#lastPos.isEqualTo(this.position)) {

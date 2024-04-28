@@ -113,7 +113,9 @@ class Vector2 {
 			throw new Vector2InstanceError("point", point);
 		}
 		if (!Number.isFinite(offset) || offset < 0) {
-			throw new TypeError(`offset was expected to be a positive, finite number, instead received ${offset}`)
+			throw new TypeError(
+				`offset was expected to be a positive, finite number, instead received ${offset}`,
+			);
 		}
 		const deltaX = Math.abs(point.x - this.x);
 		const deltaY = Math.abs(point.y - this.y);

@@ -132,9 +132,10 @@ describe("Vector2", () => {
 		});
 
 		it("should throw TypeError if passed in offset is not a positive, finite number", () => {
-			const errorMessage = `offset was expected to be a positive, finite number, instead received`;
+			const errorMessage =
+				"offset was expected to be a positive, finite number, instead received";
 			const point1 = new Vector2(23, 23);
-			const point2 = new Vector2(23,23)
+			const point2 = new Vector2(23, 23);
 			expect(() => point1.isEqualTo(point2, -1)).to.throw(
 				TypeError,
 				errorMessage,

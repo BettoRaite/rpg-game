@@ -7,4 +7,5 @@ html, body {
 #game-canvas {
   width: 100%;
   background:linear-gradient(#020122, #050517) ;
+  image-rendering: pixelated;
 }

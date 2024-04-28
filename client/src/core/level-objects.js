@@ -14,16 +14,29 @@ export const sky = new Sprite({
 	frameSize: new Vector2(320, 180),
 });
 
-export const weapons = new Pickable(
+export const pickaxe = new Pickable(
 	new Vector2(gridCells(3), gridCells(6)),
 	new Sprite({
 		imageResource: imageResources.resources.weapons,
 		frameSize: new Vector2(16, 16),
-		position: new Vector2(gridCells(0.5), gridCells(0.5)),
+		position: new Vector2(gridCells(0.5), gridCells(1)),
 		hFrames: 11,
 		vFrames: 4,
 		frame: 28,
-		scale: 1,
+		scale: 0.5,
+	}),
+);
+
+export const sword = new Pickable(
+	new Vector2(gridCells(4), gridCells(5)),
+	new Sprite({
+		imageResource: imageResources.resources.weapons,
+		frameSize: new Vector2(16, 16),
+		position: new Vector2(gridCells(0.6), gridCells(1)),
+		hFrames: 11,
+		vFrames: 4,
+		frame: 22,
+		scale: 0.7,
 	}),
 );
 

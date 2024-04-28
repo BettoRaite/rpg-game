@@ -127,6 +127,13 @@ class GameObject {
 		return;
 	}
 	detach() {
+		if (this.parent === null) {
+			return;
+		}
+		this.parent.removeChild(this);
+		events.unsubscribe(this);
+	}
+	detachAll() {
 		for (const child of this.children) {
 			child.detach();
 		}

@@ -1,8 +1,23 @@
+import { v4 as uuidv4 } from "uuid";
 // [-]: Write docs.
 // [-]: Write tests.
+
+export const EVENT_KEYS = {
+	player_move: uuidv4(),
+	pick_up: uuidv4(),
+	player_pickable_overlap: uuidv4(),
+};
+
 export class Events {
 	#callbacks = [];
 	#nextId = 0;
+
+	static eventKeys = {
+		player_move: uuidv4(),
+		pick_up: uuidv4(),
+		player_item_overlap: uuidv4(),
+	};
+
 	emit(eventName, ...values) {
 		for (const cb of this.#callbacks) {
 			if (cb.eventName === eventName) {

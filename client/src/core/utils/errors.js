@@ -1,10 +1,29 @@
-import { EXPECTED_TYPES } from "../constants.js";
 import { getDataType } from "./type-checking.js";
 // [-]: Needs testing
 /**
  * Represents a parent error for all other errors,
  * such as object instance error, invalid number error, and so on.
  */
+const EXPECTED_TYPES = {
+	number: "[Number]",
+	integer: "[Integer]",
+	positiveInteger: "[Positive Integer]",
+	positiveNumber: "[Positive Number]",
+	string: "[String]",
+	boolean: "[Boolean]",
+	undefined: "[Undefined]",
+	null: "[Null]",
+	bigint: "[BigInt]",
+	array: "[Array]",
+	object: "[Object]",
+	date: "[Date]",
+	map: "[Map]",
+	set: "[Set]",
+	animationsMap: "[instance of class AnimationsMap]",
+	vector2: "[instance of class Vector2]",
+	gameObject: "[instance of class GameObject]",
+};
+
 class InvalidTypeError extends Error {
 	/**
 	 * Creates a new InvalidTypeError instance.
@@ -186,21 +205,18 @@ export class InvalidFunctionTypeError extends Error {
 	}
 }
 /**
- * Represents an error that occurs when a value was expected to be a number,
- * but turned out to be otherwise.
+ * Represents an error that occurs when a value was expected to be a positive **and finite** number.
  * @class
  */
-export class InvalidNumberError extends InvalidTypeError {
+export class PositiveNumberError extends InvalidTypeError {
 	/**
-	 * Creates a new InvalidNumberError instance.
+	 * Creates a new PositiveNumberError instance.
 	 * @param {String} paramName - The name of the parameter
-	 * that was expected to be a number.
-	 * @param {*} actualValue - The actual value that was not a number.
+	 * that was not of the expected type.
+	 * @param {*} actualValue - The actual value that was not of the expected type.
 	 */
 	constructor(paramName, actualValue) {
-		// eslint-disable-next-line max-len
-		const message = `Parameter "${paramName}" was expected to be a number, but received "${actualValue}".`;
-		super(message);
+		super(paramName, EXPECTED_TYPES.positiveNumber, actualValue);
 		this.name = this.constructor.name;
 	}
 }

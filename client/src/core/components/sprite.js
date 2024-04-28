@@ -52,12 +52,18 @@ export default class Sprite extends GameObject {
 
 		this.#frame = Number.isInteger(frame) && frame > 0 ? frame : 0;
 		this.#frameMap = new Map();
-		this.#scale = scale ?? 1;
+		this.scale = scale ?? 1;
 
 		if (animationsManager instanceof AnimationsManager) {
 			this.#animationsManager = animationsManager;
 		}
 		this.#buildFrameMap();
+	}
+	get imageResource() {
+		return this.#imageResource;
+	}
+	get scale() {
+		return this.#scale;
 	}
 	set scale(scale) {
 		if (!(Number.isFinite(scale) && scale >= 0)) {
@@ -110,16 +116,17 @@ export default class Sprite extends GameObject {
 
 		const frameSizeX = this.#frameSize.x;
 		const frameSizeY = this.#frameSize.y;
+
 		ctx.drawImage(
-			this.#imageResource.image,
+			this.imageResource.image,
 			frameStartX,
 			frameStartY,
 			frameSizeX,
 			frameSizeY,
 			startDrawX,
 			startDrawY,
-			frameSizeX * this.#scale,
-			frameSizeY * this.#scale,
+			frameSizeX * this.scale,
+			frameSizeY * this.scale,
 		);
 	}
 }

@@ -1,25 +1,29 @@
-// FIXME: Add throw statements
 import { DIRECTION, GRID_CELL } from "../constants.js";
+import { StringTypeError, Vector2InstanceError } from "../utils/errors.js";
 
-import { Vector2InstanceError } from "../utils/errors.js";
 import Vector2 from "../vector2.js";
 /**
- * Calculates new destination position based on the
- * current entity position and the given direction.
- * @param {String} direction - Direction to which entity
- * should be moved by 16 pixels.
- * @param {Vector2} entityPos - Current position of the entity.
- * @return {Vector2} - New destination of the entity or entity position
- * if direction is default.
+ * Calculates the new destination position of an entity based on its current position and a given direction.
+ *
+ * This function assumes the entity moves on a grid-based system with cells of size {@link GRID_CELL.size}.
+ *
+ * @param {string} direction - The direction in which the entity should move.
+ *   Valid directions are: `${DIRECTION.top}`, `${DIRECTION.down}`, `${DIRECTION.left}`, or `${DIRECTION.right}`.
+ * @param {Vector2} entityPos - The current position of the entity.
+ * @returns {Vector2} The new destination position of the entity. If `direction` is `${DIRECTION.default}`, the original `entityPos` is returned.
+ *
+ * @throws {Vector2InstanceError} - Thrown If `entityPos` is not a `Vector2` instance or `StringTypeError` if `direction` is not a string.
+ * @throws {SyntaxError} - Thrown if an invalid `direction` is provided.
+ *
  * @example
  * const entityPos = new Vector2(20, 20);
  * const destPos = calcNewDestPos('TOP', entityPos);
- * console.log(destPos.x, destPos.y); // 20, 4 because canvas's 'y' is
- * // at 0 at the top of the monitor and at the bottom 'y' = monitorHeight.
+ * console.log(destPos.x, destPos.y); // Output: 20, 4 (assuming positive Y is up)
  */
+
 export const calcNewDestPos = (direction, entityPos) => {
 	if (typeof direction !== "string") {
-		throw new Vector2InstanceError("direction", direction);
+		throw new StringTypeError("direction", direction);
 	}
 	if (!(entityPos instanceof Vector2)) {
 		throw new Vector2InstanceError("entityPos", entityPos);
