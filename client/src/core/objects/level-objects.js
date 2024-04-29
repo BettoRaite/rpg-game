@@ -1,8 +1,8 @@
-import Sprite from "./components/sprite.js";
-import Pickable from "./entities/pickable.js";
-import { gridCells } from "./helpers/grid.js";
-import { imageResources } from "./image-resources.js";
-import Vector2 from "./vector2.js";
+import Sprite from "../components/sprite.js";
+import { gridCells } from "../helpers/grid.js";
+import { imageResources } from "../image-resources.js";
+import Vector2 from "../vector2.js";
+import Pickable from "./pickable.js";
 
 export const ground = new Sprite({
 	imageResource: imageResources.resources.ground,
@@ -15,11 +15,11 @@ export const sky = new Sprite({
 });
 
 export const pickaxe = new Pickable(
-	new Vector2(gridCells(3), gridCells(6)),
+	new Vector2(gridCells(5), gridCells(2)),
 	new Sprite({
 		imageResource: imageResources.resources.weapons,
 		frameSize: new Vector2(16, 16),
-		position: new Vector2(gridCells(0.5), gridCells(1)),
+		position: new Vector2(gridCells(0.8), gridCells(1.1)),
 		hFrames: 11,
 		vFrames: 4,
 		frame: 28,

@@ -13,6 +13,7 @@ class Pickable extends GameObject {
 		}
 		super(position);
 		this.pickUpDistance = 12;
+
 		for (const component of components) {
 			if (this.#sprite === null && component instanceof Sprite) {
 				this.#sprite = component;

@@ -11,8 +11,8 @@ import AnimationsMap from "../animation/animations-map.js";
 import Sprite from "../components/sprite.js";
 import { gridCells } from "../helpers/grid.js";
 import { imageResources } from "../image-resources.js";
-import { shadow } from "../level-objects.js";
 import Vector2 from "../vector2.js";
+import { shadow } from "./level-objects.js";
 import Player from "./player/player.js";
 
 const playerAnimationsMap = new AnimationsMap({

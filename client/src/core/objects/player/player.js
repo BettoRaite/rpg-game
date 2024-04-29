@@ -92,8 +92,9 @@ class Player extends GameObject {
 		const timeLeft = this.itemPickUpTime - deltaTime;
 		if (timeLeft <= 0) {
 			this.itemPickUpTime = 0;
-			this.#itemPickupShell.detachAll();
+			this.removeChild(this.#itemPickupShell);
 			this.#itemPickupShell = null;
+
 			return;
 		}
 		this.itemPickUpTime = timeLeft;
@@ -102,7 +103,9 @@ class Player extends GameObject {
 	#onItemPickUp(sprite) {
 		this.#itemPickupShell = new GameObject();
 		this.#itemPickupShell.addChild(sprite);
+		sprite.position.x = 0;
 		sprite.position.y = 4;
+
 		this.addChild(this.#itemPickupShell);
 	}
 	#emitMoveEvent() {
