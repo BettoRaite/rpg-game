@@ -5,7 +5,6 @@ import {
 } from "./utils/errors.js";
 import { NumberTypeError } from "./utils/errors.js";
 import Vector2 from "./vector2.js";
-// FIXME: needs testing.
 /**
  * GameObject class is an abstraction layer that provides
  * useful functionality for game entity like attaching children

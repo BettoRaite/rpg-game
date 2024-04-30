@@ -4,15 +4,7 @@ import {
 } from "../utils/errors.js";
 import { isObject } from "../utils/type-checking.js";
 import { AnimationController } from "./animation-controller.js";
-import {
-	Animation,
-	pickUpItem,
-	standAnimation,
-	walkDownAnimation,
-	walkLeftAnimation,
-	walkRightAnimation,
-	walkTopAnimation,
-} from "./animation.js";
+import { Animation } from "./animation.js";
 
 /**
  * Represents a mapping between a key and
