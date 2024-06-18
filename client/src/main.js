@@ -12,6 +12,7 @@ import { player } from "./core/objects/main-character.js";
 import Pickable from "./core/objects/pickable.js";
 import Vector2 from "./core/vector2.js";
 
+console.log(import.meta.url);
 const canvas = document.getElementById("game-canvas");
 const ctx = canvas.getContext("2d");
 

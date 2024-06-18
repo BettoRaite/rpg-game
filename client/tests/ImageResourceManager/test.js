@@ -1,5 +1,4 @@
 import { assert, expect } from "../../node_modules/chai/chai.js";
-import { EXPECTED_TYPES } from "../../src/core/constants.js";
 import ImageResourceManager from "../../src/core/resources/image-resource-manager.js";
 import { ObjectInstanceError } from "../../src/core/utils/errors.js";
 
@@ -13,9 +12,7 @@ describe("ImageResourceManager", () => {
 	describe("constructor", () => {
 		it(`should throw ObjectInstanceError 
     if passed value is not an object`, () => {
-			const errorMessage =
-				`Parameter: "resourceMap"\n` +
-				`Was expected to be of type: ${EXPECTED_TYPES.object}\n`;
+			const errorMessage = `Parameter: "resourceMap"\nWas expected to be of type: ${EXPECTED_TYPES.object}\n`;
 			expect(() => new ImageResourceManager("not an object.")).to.throw(
 				ObjectInstanceError,
 				errorMessage,
@@ -45,10 +42,10 @@ describe("ImageResourceManager", () => {
 		});
 	});
 	describe("getter resources", () => {
-		it(`should return an object`, () => {
+		it("should return an object", () => {
 			assert.isObject(globalImageResourceManager.resources);
 		});
-		it(`should throw TypeError on assigment`, () => {
+		it("should throw TypeError on assigment", () => {
 			expect(() => (globalImageResourceManager.resources = {})).to.throw(
 				TypeError,
 			);
